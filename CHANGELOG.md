@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/hirasawaau/nest-firebase/compare/v1.0.1...v1.0.2) (2023-07-11)
+
+
+### Bug Fixes
+
+* **npm:** Fixing word ([455b69a](https://github.com/hirasawaau/nest-firebase/commit/455b69a0eef8e41ed5d750075dea7d51d6bd6c3e))
+
 ## [1.0.1](https://github.com/hirasawaau/nest-firebase/compare/v1.0.0...v1.0.1) (2023-07-11)
 
 
