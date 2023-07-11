@@ -1,6 +1,6 @@
 {
   "name": "nest-firebase",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "nest.js' wrapper for firebase-admin-sdk",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
