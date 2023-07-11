@@ -1,0 +1,57 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  lint:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install pnpm
+        run: npm i -g pnpm
+      - name: Install Module
+        run: pnpm i
+      - name: Lint
+        run: pnpm run lint
+  integration_test:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install pnpm
+        run: npm i -g pnpm
+      - name: Install Module
+        run: pnpm i
+      - name: Lint
+        run: pnpm run lint
+      - name: Integration
+        run: pnpm run test:e2e
+        env:
+          FIREBASE_CLIENT_EMAIL: ${{ secrets.FIREBASE_CLIENT_EMAIL }}
+          FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
+          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+
+  semantic:
+    runs-on: ubuntu-latest
+    needs:
+      - 'lint'
+      - 'integration_test'
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '20.x'
+      - name: Install pnpm
+        run: npm i -g pnpm
+      - run: pnpm i
+      - run: pnnpm run build
+      - run: pnpm run semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.CR_PAT }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
