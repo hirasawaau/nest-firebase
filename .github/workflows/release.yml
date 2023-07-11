@@ -50,7 +50,7 @@ jobs:
       - name: Install pnpm
         run: npm i -g pnpm
       - run: pnpm i
-      - run: pnnpm run build
+      - run: pnpm run build
       - run: pnpm run semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.CR_PAT }}
