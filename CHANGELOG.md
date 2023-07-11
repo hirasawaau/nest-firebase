@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/hirasawaau/nest-firebase/compare/v1.0.2...v1.0.3) (2023-07-11)
+
+
+### Bug Fixes
+
+* **docs&code:** Lint the code and docs ([26a9e99](https://github.com/hirasawaau/nest-firebase/commit/26a9e99c23b3077caccc247b56a1ed3fcf56c594))
+
 ## [1.0.2](https://github.com/hirasawaau/nest-firebase/compare/v1.0.1...v1.0.2) (2023-07-11)
 
 
