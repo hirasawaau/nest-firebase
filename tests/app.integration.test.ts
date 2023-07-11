@@ -1,49 +1,48 @@
-import { Test } from "@nestjs/testing";
-import { AppModule } from "./src/app.module";
-import { INestApplication } from "@nestjs/common";
-import request from "supertest";
-import { UserRecord } from "firebase-admin/auth";
+import { Test } from '@nestjs/testing'
+import { AppModule } from './src/app.module'
+import { UserRecord } from 'firebase-admin/auth'
 import {
   FastifyAdapter,
   NestFastifyApplication,
-} from "@nestjs/platform-fastify";
+} from '@nestjs/platform-fastify'
+import { HttpStatus } from '@nestjs/common'
 
-describe("App", () => {
-  let app: NestFastifyApplication;
+const UID = process.env.UID_TEST ?? 'jFxYrgBOtuNdp6N5iRwsP0uJlrM2'
+const EMAIL = process.env.EMAIL_TEST ?? 'test@test.com'
+
+describe('App', () => {
+  let app: NestFastifyApplication
   beforeAll(async () => {
     const module = await Test.createTestingModule({
       imports: [AppModule],
-    }).compile();
+    }).compile()
 
     app = module.createNestApplication<NestFastifyApplication>(
-      new FastifyAdapter()
-    );
+      new FastifyAdapter(),
+    )
 
-    await app.init();
-    await app.getHttpAdapter().getInstance().ready();
-  });
+    await app.init()
+    await app.getHttpAdapter().getInstance().ready()
+  })
 
-  it("should be defined", () => {
-    expect(app).toBeDefined();
-  });
+  it('should be defined', () => {
+    expect(app).toBeDefined()
+  })
 
-  describe("Auth", () => {
-    it("should connect to firebase and return correct user", async () => {
-      // You can change this to your own uid and email
-      const uid = "jFxYrgBOtuNdp6N5iRwsP0uJlrM2";
-      const email = "test@test.com";
+  describe('Auth', () => {
+    it('should connect to firebase and return correct user', async () => {
       const res = await app.inject({
-        method: "GET",
-        url: `/users/${uid}`,
-      });
-      const payload = JSON.parse(res.payload) as UserRecord;
-      expect(res.statusCode).toEqual(200);
-      expect(payload.email).toEqual(email);
-      expect(payload.uid).toEqual(uid);
-    });
-  });
+        method: 'GET',
+        url: `/users/${UID}`,
+      })
+      const payload = JSON.parse(res.payload) as UserRecord
+      expect(res.statusCode).toEqual(HttpStatus.OK)
+      expect(payload.email).toEqual(EMAIL)
+      expect(payload.uid).toEqual(UID)
+    })
+  })
 
   afterAll(async () => {
-    await app.close();
-  });
-});
+    await app.close()
+  })
+})

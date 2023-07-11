@@ -1,6 +1,8 @@
 import { Logger, Provider } from '@nestjs/common'
 import { getFirebaseServiceToken, getFirebaseToken } from './firebase.utils'
 import { app } from 'firebase-admin'
+import { Database } from 'firebase-admin/database'
+import { Firestore } from 'firebase-admin/firestore'
 import { FirebaseFeatureOptions } from './interfaces/firebase.feature.inteface'
 
 const logger = new Logger('FirebaseProvider')
@@ -21,7 +23,7 @@ export function createFirebaseRealtimeDatabaseProvider(
 ): Provider {
   return {
     provide: getFirebaseServiceToken('database', appName),
-    useFactory(app: app.App) {
+    useFactory(app: app.App): Database {
       return app.database(databaseURL)
     },
     inject: [getFirebaseToken(appName)],
@@ -31,7 +33,7 @@ export function createFirebaseRealtimeDatabaseProvider(
 export function createFirebaseFirestoreProvider(appName?: string): Provider {
   return {
     provide: getFirebaseServiceToken('firestore', appName),
-    useFactory(app: app.App) {
+    useFactory(app: app.App): Firestore {
       return app.firestore()
     },
     inject: [getFirebaseToken(appName)],

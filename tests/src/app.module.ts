@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common'
 import { FirebaseModule } from '../../libs'
-import { credential } from 'firebase-admin'
 import { UserModule } from './users/user.module'
 import { FirebaseConfigService } from './firebase.config'
 import { ConfigModule } from '@nestjs/config'
