@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/hirasawaau/nest-firebase/compare/v1.0.0...v1.0.1) (2023-07-11)
+
+
+### Bug Fixes
+
+* **npm:** add .npmignore ([246aa38](https://github.com/hirasawaau/nest-firebase/commit/246aa38cb258cc2b96881a808a76aa3731370202))
+
 # 1.0.0 (2023-07-11)
 
 
